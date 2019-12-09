@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Worth by Association
+</title>
+  <meta charset="utf-8">
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <style>
+    hr {
+      border: 0;
+      border-top: 3px double #586F84;
+      margin: 18px 0;
+    }
+    hr.end {
+      width: 35%;
+      border-top: 3px double #586F84;
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+}
+    th {color: white; background-color: black; padding-top: 7px; padding-bottom: 7px;}
+    td {padding: 3px; }
+    table { width: 100%; border-collapse: collapse;}
+    table.dataframe { 
+      width: 80%;
+      margin-left: 50px;
+      margin-top: 25px; 
+    }
+    table.dataframe>thead>tr>th {
+      border-color: black; 
+      background: linear-gradient(#1B1B1B, black); 
+    }
+    table.term-groups {
+      margin-top: 25px; 
+      margin-bottom: 25px; 
+    }
+    table.term-groups>tbody>tr>th {
+      border-color: black;
+      background: linear-gradient(#1B1B1B, black); 
+      text-align: left;
+      padding: 6px;
+      width: 25%;
+    }
+
+    table.term-groups>tbody>tr>td {
+      border-color: black;
+      text-align: left;
+      padding: 6px;
+    } 
+
+    td, th {border: 1px solid black; font-size: 95%; text-align: center;
+    }
+    body {
+      font-family: 'Garamond', 'Times New Roman', 'Times', 'serif';
+      color: rgba(34,34,34,.77);
+
+    }
+    
+    h1 {
+      font-family: 'Garamond', 'Times New Roman', 'Times', 'serif';
+      font-weight: normal;
+      margin-top: 5px;
+      margin-bottom: 5px;
+      color: black;
+      font-variant: small-caps;
+    }
+    h2 {
+      font-family: 'Garamond', 'Times New Roman', 'Times', 'serif';
+      font-weight: normal;
+      color: black;
+      margin-top: 5px;
+      margin-bottom: 5px;
+    }
+    h3, h4 {
+      
+      color: rgba(34,34,34,.77);
+      font-weight: normal;
+      margin-top: 5px;
+      margin-bottom: 5px;
+    }
+    h5 {
+        
+        font-weight: normal;
+        color: black;
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+    p {
+      margin-top: 1px;
+      margin-bottom: 1px;
+    }
+    .youtube {
+      width: 100%;
+      height: 45vh;
+    }
+    .middle, .top {
+      background: #a7b1ba;
+
+    }
+    .footer {
+      position: fixed;
+      color: black;
+      bottom: 30px;
+      margin-left: 25px;
+      margin-right: 155px;
+    }
+    .table-wrapper {
+      overflow-y: scroll;
+      width: 70%;
+      height: 100%;
+      margin-left: 10px;
+      /*display: block;
+      */
+    }
+    .remark-slide-content {
+      padding-top: 80px;
+      padding-bottom: 80px;
+    }
+    .remark-slide-content h1 {
+        font-size: 45px;
+    }
+    .remark-slide-content h2 {
+        font-size: 32px;
+    }
+    .remark-slide-content h3 {
+        font-size: 28px;
+    }
+    .remark-slide-content h4,h5 {
+        font-size: 22px;
+    }
+    img.hist {
+      width:85%;
+    }
+    h2.performance, h4.performance, h3.performance {
+      text-align:center;
+      margin-bottom: 25px;
+    }
+    img.figure {
+      width: 95%;
+      height: auto;
+      padding-bottom:15px;
+      padding-top:15px; 
+      margin-left: auto;
+      margin-right: auto;
+      display: block;
+    
+    }
+    
+    /* Chrome, Safari */
+    ::-webkit-scrollbar {
+    width: 15px;
+    height: 15px;
+
+    }
+    ::-webkit-scrollbar-track-piece  {
+    background-color: white;
+    }
+    ::-webkit-scrollbar-thumb:vertical {
+    height: 5px;
+    border-radius: 15px;
+    background-color: black;
+}
+  </style>
+  <script>
+
+  </script>
+</head>
+  <body>
+    <textarea id="source">
+
+class: middle
+
+*** 
+
+# Worth by Association: 
+
+## Gender in <em>The New York Times Book Review</em>, and Beyond
+
+***
+
+<br/>
+<br/>
+
+### Matthew Lavin
+### Clinical Assistant Professor of English
+### Director of Digital Media Lab
+### University of Pittsburgh
+### Fall 2019
+
+---
+class: top
+
+***
+
+# Research Questions: General
+
+***
+
+- ## Did book reviews stop mediating culture hierarchies, or did their approaches persist in subtler form? 
+
+- ## How can we best understand the mechanics of any observed mediations? 
+
+- ## In what directions did mediations nudge readers, and how did interventions change over time? 
+
+<hr class="end"/>
+
+---
+class: top
+
+***
+
+# Research Questions: <em>NYTBR</em>
+
+***
+
+- ## Can machine learning predict the presumed gender of the book's author?
+
+- ## If so, what do the terms informing predictions tell us about the gendering of review language?
+
+<hr class="end"/>
+
+---
+class: top
+
+***
+
+# Study Design: Data
+
+***
+
+- ## <em>The New York Times Book Review</em>
+- ## Sample of Single-work Reviews, January 1, 1905-December 31, 1925
+- ## Drawn from a larger set of approximately 27,000 articles
+- ## Approximately 2,800 book reviews
+- ## Genders of reviewed work&rsquo;s author tagged &ldquo;assumed male,&rdquo; &ldquo;assumed female,&rdquo; &ldquo;multi,&rdquo; or &ldquo;unknown&rdquo;
+- ## Assumed means assumed by the reviewer
+
+<hr class="end"/>
+
+---
+class: top
+
+*** 
+
+# Study Design: Methods
+
+***
+
+- ## Text Processing
+ 
+- ## Machine Learning: random training and test (hold out cross-validation)
+
+- ## Resampling of 1,000 different randomized training set and test set membership combinations
+
+- ## Feature Selection Scenarios
+
+<hr class="end"/>
+
+---
+class: top
+
+***
+
+# Feature Selection Scenarios
+
+***
+
+## 1. No terms removed
+
+## 2. Stopwords removed
+
+## 3. Stopwords, gender nouns, and titles removed
+
+## 4. Stopwords, gender nouns, and titles removed, along with common first names
+
+<hr class="end"/>
+
+---
+class: top
+
+***
+
+# Scenario Performance
+
+***
+
+<table class="table table-bordered table-hover table-condensed">
+<tbody><tr>
+<th>Features Removed</th>
+<th>F1 (F)</th>
+<th>Precision (F)</th>
+<th>Recall (F)</th>
+<th>F1 (M)</th>
+<th>Precision (M)</th>
+<th>Recall (M)</th>
+<th>Accuracy</th>
+</tr>
+<tr>
+
+<td>None</td>
+<td>0.776</td>
+<td>0.773</td>
+<td>0.781</td>
+<td>0.899</td>
+<td>0.901</td>
+<td>0.897</td>
+<td>86.10%</td>
+</tr>
+<tr>
+
+<td>Stopwords</td>
+<td>0.712</td>
+<td>0.687</td>
+<td>0.743</td>
+<td>0.863</td>
+<td>0.881</td>
+<td>0.848</td>
+<td>81.50%</td>
+</tr>
+<tr>
+
+<td>Stopwords, gender nouns, and gendered titles</td>
+<td>0.593</td>
+<td>0.551</td>
+<td>0.649</td>
+<td>0.793</td>
+<td>0.829</td>
+<td>0.762</td>
+<td>72.60%</td>
+</tr>
+<tr>
+
+<td>Stopwords, gender nouns, gendered titles, and forenames</td>
+<td>0.581</td>
+<td>0.538</td>
+<td>0.638</td>
+<td>0.786</td>
+<td>0.823</td>
+<td>0.754</td>
+<td>71.70%</td>
+</tr>
+</tbody></table>
+
+<hr class="end"/>
+
+
+---
+class: top
+
+****
+
+# Scenario 1: Top Terms
+
+***
+
+<table class="table table-bordered table-hover table-condensed">
+<tbody><tr>
+<td style="border:0;" colspan="2">Female Label Coefficients</td>
+<td style="border:0;" colspan="2">Male Label Coefficients</td>
+</tr>
+<tr>
+<th>Term</th>
+<th>Score</th>
+<th>Term</th>
+<th>Score</th>
+</tr>
+<tr>
+<td>Her</td>
+<td>4.78</td>
+<td>His</td>
+<td>2.07</td>
+</tr>
+<tr>
+<td>She</td>
+<td>3.82</td>
+<td>Mr</td>
+<td>1.73</td>
+</tr>
+<tr>
+<td>Mrs</td>
+<td>2.12</td>
+<td>The</td>
+<td>1.08</td>
+</tr>
+<tr>
+<td>Miss</td>
+<td>1.51</td>
+<td>Of </td>
+<td>0.78</td>
+</tr>
+<tr>
+<td>Woman</td>
+<td>1.23</td>
+<td>That</td>
+<td>0.49</td>
+</tr>
+</tbody></table>
+
+<hr class="end"/>
+
+---
+class: top
+
+****
+
+# Scenario 4: Top Terms
+
+***
+
+<table class="table table-bordered table-hover table-condensed">
+<tbody><tr>
+<td style="border:0;" colspan="2">Female Label Coefficients</td>
+<td style="border:0;" colspan="2">Male Label Coefficients</td>
+</tr>
+
+<tr>
+<th>Term</th>
+<th>Score</th>
+<th>Term</th>
+<th>Score</th>
+</tr>
+<tr>
+<td>Child</td> 
+<td>1.19</td>
+<td>Dr</td>
+<td>0.67</td>
+</tr>
+<tr>
+<td>Story</td>   
+<td>1.06</td>
+<td>British</td> 
+<td>0.64</td>
+</tr>
+<tr>
+<td>Novel</td>   
+<td>0.96</td>
+<td>Volume</td>  
+<td>0.61</td>
+</tr>
+<tr>
+<td>Heroine</td>   
+<td>0.95</td>
+<td>Essay</td> 
+<td>0.58</td>
+</tr>
+<tr>
+<td>Home</td>  
+<td>0.81</td>
+<td>Prof</td>  
+<td>0.52</td>
+</tr>
+</tbody></table>
+
+<hr class="end"/>
+
+---
+class: top
+
+*** 
+
+# Interpretive Groupings 
+
+### for Female-Leaning Coefficients (Top 50 Lemmas)
+
+***
+
+<table class="term-groups">
+<tbody>
+<tr>
+<th>Category</th>
+<th>Lemmas (alphabetized)</th>
+</tr>
+<tr>
+<td>Author and Text</td>
+<td>Book, character, fiction, heroine, letter, novel, picture, plot, story</td>
+</tr>
+<tr>
+<td>Domestic and Social</td>
+<td>Background, child, custom, family, home, house, household, queen, social, society, widow</td>
+</tr>
+<tr>
+<td>Feminized Virtues</td>
+<td>Charming, clever, dear, feminine, friend, life, little, lovely, young</td>
+</tr>
+<tr>
+<td>Marriage and Courtship</td>
+<td>Handsome, heart, marriage, married, meet, romance</td>
+</tr>
+<tr>
+<td>Time</td>
+<td>Day, year</td>
+</tr>
+<tr>
+<td>Economic Class</td>
+<td>Labor, poor</td>
+</tr>
+<tr>
+<td>Other</td>
+<td>Come, color, know, lace, moor, real, type, vivid, want, wear, Wharton</td>
+</tr>
+</tbody></table>
+
+<hr class="end"/>
+
+---
+class: top
+
+***
+
+# Interpretive Groupings 
+
+### for Male-Leaning Coefficients (Top 50 Lemmas)
+
+***
+
+<table class="term-groups">
+<tbody><tr>
+<th>Category</th>
+<th>Lemmas (alphabetized)</th>
+</tr>
+<tr>
+<td>Author and Text</td>
+<td>Drama, essay, paper, play, translation, volume</td>
+</tr>
+<tr>
+<td>Conquest and War</td>
+<td>Army, battle, captain, empire, general, military, sea, ship</td>
+</tr>
+<tr>
+<td>Geographic Locales</td>
+<td>British, Germany, Japanese</td>
+</tr>
+<tr>
+<td>Scholarship and Science</td>
+<td>College, dr, prof, science, scientific, Shakespeare, theory, university</td>
+</tr>
+<tr>
+<td>Government and Policy</td>
+<td>Constitution, government, law, nation, national, policy, political, president, state, united</td>
+</tr>
+<tr>
+<td>Procedural</td>
+<td>Fact, history, lie, opinion, present, second, series</td>
+</tr>
+<tr>
+<td>Uncategorized</td>
+<td>Business, economic, fr, ill, jame, mile, sir</td>
+</tr>
+</tbody></table>
+
+<hr class="end"/>
+
+---
+class: top
+
+***
+
+# Interpretation
+
+***
+
+- ## The &ldquo;superficial&rdquo; layers of gender norming tell us more than one might think 
+- ## Many of the gender identity assumptions we make today were encoded in book reviews
+- ## Men may write about female people/characters and vice versa, but mentions of these doesn&rsquo;t add enough noise to confound the model
+
+<hr class="end"/>
+---
+class: top
+
+***
+
+# Interpretation
+
+***
+
+- ## When the most superficially gendered features are removed, topical norms still predict gender 
+
+- ## Presumed author gender is associated with specific topical vocabularies
+
+- ## Form and procedural lemmas seem present as well
+
+<hr class="end"/>
+
+---
+class: top
+
+***
+
+# Interpretation 
+
+***
+
+- ## Do reviews <em>reflect</em> gender norms for a book&rsquo;s topic, or do they <em>amplify</em> these boundaries? 
+
+- ## Traditional literary studies says the doctrine of separate spheres breaks down, 1900-1930 
+
+- ## Other DH scholars (Jockers, Kirilloff, Mimno) have found word-level predictors for author and character gender in 19th-century fiction that support the traditional interpretation
+
+- ## Book reviews tell a different story, which suggests <em>amplification/distortion</em>, not reflection
+
+<hr class="end"/>
+
+---
+class: top
+
+***
+
+# Three Levels of Analysis
+
+***
+
+- ## Individual level
+
+- ## Comparative level
+
+- ## Network level
+
+
+<hr class="end"/>
+
+---
+class: top
+
+***
+
+# Book Reviews as Affiliation Networks
+
+***
+
+- ## Construct weighted bipartite graphs of periodicals and authors
+- ## Author mentions in periodicals is an NLP/NER task, so this is an approximation based on an author list
+- ## Each review in a periodical increases edge weight between
+- ## One network per year, 1880-1925
+
+<hr class="end"/>
+
+---
+class: top
+
+<img class="figure" src="figures/ach_7.png"/>
+
+
+
+---
+class: top
+
+***
+
+# Date Prediction Procedure 
+
+***
+
+- ## Project network to one mode (authors or periodicals)
+- ## Measure density, radius, diameter, triadic closure, average path length, average degree and average clustering coefficient of all nodes
+- ## Express all measures as the difference between the measure and the average measure from a set of random networks of identical size
+- ## Approach based on work co-authored by John Ladd (Northwestern)
+
+<hr class="end"/>
+
+---
+class: top
+
+***
+
+# Date Prediction Procedure 
+
+***
+
+- ## Use network measures as training features
+- ## Use network years as training labels
+- ## Linear regression, leave-one-out validation
+- ## Score accuracy and inspect feature coefficients 
+
+<hr class="end"/>
+
+---
+class: top
+
+
+<img class="figure" src="figures/ach_8.png"/>
+
+
+---
+class: top
+
+<img class="figure" src="figures/ach_9.png"/>
+
+---
+class: top
+
+<img class="figure" src="figures/ach_10.png"/>
+
+---
+class: top
+
+<img class="figure" src="figures/ach_14.png"/>
+
+---
+class: top
+
+<img class="figure" src="figures/ach_15.png"/>
+
+
+
+<hr class="end"/>
+
+    </textarea>
+    <script src="https://remarkjs.com/downloads/remark-latest.min.js">
+    </script>
+    <script>
+      var slideshow = remark.create();
+    </script>
+  </body>
+</html>
