@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Word Embeddings</title>
+  <meta charset="utf-8">
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <style>
+    hr {
+      border: 0;
+      border-top: 3px double #586F84;
+      margin: 18px 0;
+    }
+    hr.end {
+      width: 35%;
+      border-top: 3px double #586F84;
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+}
+    th {color: white; background-color: black; padding-top: 7px; padding-bottom: 7px;}
+    td {padding: 3px; }
+    table { width: 100%; border-collapse: collapse;}
+    table.dataframe { 
+      width: 80%;
+      margin-left: 50px;
+      margin-top: 25px; 
+    }
+    table.dataframe>thead>tr>th {
+      border-color: black; 
+      background: linear-gradient(#1B1B1B, black); 
+    }
+    table.term-groups {
+      margin-top: 25px; 
+      margin-bottom: 25px; 
+    }
+    table.term-groups>tbody>tr>th {
+      border-color: black;
+      background: linear-gradient(#1B1B1B, black); 
+      text-align: left;
+      padding: 6px;
+      width: 25%;
+    }
+
+    table.term-groups>tbody>tr>td {
+      border-color: black;
+      text-align: left;
+      padding: 6px;
+    } 
+
+    td, th {border: 1px solid black; font-size: 95%; text-align: center;
+    }
+    body {
+      font-family: 'Garamond', 'Times New Roman', 'Times', 'serif';
+      color: black;
+
+    }
+    
+    h1 {
+      font-family: 'Garamond', 'Times New Roman', 'Times', 'serif';
+      font-weight: normal;
+      margin-top: 5px;
+      margin-bottom: 5px;
+      color: black;
+      font-variant: small-caps;
+    }
+    h2 {
+      font-family: 'Garamond', 'Times New Roman', 'Times', 'serif';
+      font-weight: normal;
+      color: black;
+      margin-top: 5px;
+      margin-bottom: 5px;
+    }
+    h3, h4 {
+      
+      color: rgba(34,34,34,.77);
+      font-weight: normal;
+      margin-top: 5px;
+      margin-bottom: 5px;
+    }
+    h5 {
+        
+        font-weight: normal;
+        color: black;
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+    p {
+      margin-top: 1px;
+      margin-bottom: 1px;
+    }
+    .youtube {
+      width: 100%;
+      height: 45vh;
+    }
+    .middle, .top {
+      background: #a7b1ba;
+
+    }
+    .footer {
+      position: fixed;
+      color: black;
+      bottom: 30px;
+      margin-left: 25px;
+      margin-right: 155px;
+    }
+    .table-wrapper {
+      overflow-y: scroll;
+      width: 70%;
+      height: 100%;
+      margin-left: 10px;
+      /*display: block;
+      */
+    }
+    .remark-slide-content {
+      padding-top: 30px;
+      padding-bottom: 30px;
+    }
+    .remark-slide-content h1 {
+        font-size: 45px;
+    }
+    .remark-slide-content h2 {
+        font-size: 32px;
+    }
+    .remark-slide-content h3 {
+        font-size: 28px;
+    }
+    .remark-slide-content h4,h5 {
+        font-size: 22px;
+    }
+    img.hist {
+      width:85%;
+    }
+    h2.performance, h4.performance, h3.performance {
+      text-align:center;
+      margin-bottom: 25px;
+    }
+    img.figure {
+      width: 95%;
+      height: auto;
+      padding-bottom:15px;
+      padding-top:15px; 
+      margin-left: auto;
+      margin-right: auto;
+      display: block;
+    
+    }
+
+    img.cather {
+      width: 75%;
+      height: auto;
+      padding-bottom:15px;
+      padding-top:15px; 
+      margin-left: auto;
+      margin-right: auto;
+      display: block;
+    
+    }
+    
+    /* Chrome, Safari */
+    ::-webkit-scrollbar {
+    width: 15px;
+    height: 15px;
+
+    }
+    ::-webkit-scrollbar-track-piece  {
+    background-color: white;
+    }
+    ::-webkit-scrollbar-thumb:vertical {
+    height: 5px;
+    border-radius: 15px;
+    background-color: black;
+}
+  </style>
+  <script>
+
+  </script>
+</head>
+  <body>
+    <textarea id="source">
+
+class: middle
+
+*** 
+
+# Word Embedding Methods and Applications
+
+***
+
+<br/>
+<br/>
+
+### Matthew Lavin
+### Clinical Assistant Professor of English
+### Director of Digital Media Lab
+### University of Pittsburgh
+### Fall 2019
+
+<hr/>
+
+##### View slides at [bit.ly/word2vec-slides](bit.ly/word2vec-slides)
+
+---
+class: top
+
+***
+
+# Class Outline 
+
+***
+
+- Introductions (5-7 mins)
+- Slides (10-12 mins, feel free to interrupt with questions)
+  * Requirements of source data
+  * Brief overview of common word embedding methods 
+      - GloVe
+      - Word2vec
+      - BERT
+  * What word embeddings &ldquo;measure&rdquo; or model
+  * How this constellation of approaches is used 
+- Colab activity (15-20 mins)
+     - How I’m using word embeddings to model historical discourse
+     - If time: designing an experiment that uses word embedding measures to address a research question
+- Q&A (5-10 mins)
+
+***
+
+---
+class: top
+
+***
+
+# Introductions
+
+*** 
+
+## 1. Your name
+## 2. A little about you and your interests
+
+***
+
+---
+class: top
+
+***
+
+# Word Embeddings Generally
+
+*** 
+
+- ## Represents &ldquo;related&rdquo; as words that appear in similar contexts to one another
+- ## All word embeddings models represent each word in some kind of high-dimensional space, e.g. a vector with 200 dimensions
+- ## Absolute vector positions are meaningless but distances to other word spaces are meaningful
+
+***
+
+---
+class: top 
+
+***
+
+# Source Data Requirements
+
+***
+
+- ## Unsupervised learning (no &ldquo;ground truth&rdquo; training labels)
+- ## Models relatedness by words that appear often within a window size (e.g. five words to the left and right of a source word)
+- ## Requires "full text," not just bag-of-words data 
+- ## Works best if sentences are segmented before training
+
+***
+---
+class: top 
+
+***
+
+# GloVe
+
+***
+
+- ## Uses co-occurrence statistics to model relationships
+- ## Creates &ldquo;a global word-word co-occurrence matrix&rdquo;
+- ## Tracks how frequently words co-occur with one another in a given corpus 
+- ## Performs &ldquo;a single pass through the entire corpus to collect the statistics,&ldquo; which can be &ldquo;computationally expensive&rdquo; 
+- ## This is a one-time up-front cost
+- ## More at [https://nlp.stanford.edu/projects/glove/](https://nlp.stanford.edu/projects/glove/)
+
+***
+
+---
+class: top 
+
+***
+
+# Word2vec
+
+***
+
+- ## Uses deep learning or neural network to model which words are related to other words
+- ## Trained on a fake task ... predict the next word given a sequence but, instead of using a co-occurrence matrix of all words, uses a binary classification approach to differentiate real target words from imaginary (noise) words 
+- ## Can use softmax and/or negative sampling 
+- ## Trained using CBOW or skip-grams approach
+- ## See [bit.ly/word2vec-on-medium](bit.ly/word2vec-on-medium)
+ 
+***
+
+---
+class: top 
+
+***
+
+# BERT
+
+***
+
+- ## Produces high-dimensional vectors, just like others, using a deep learning approach
+- ## Applies &ldquo;bidirectional training of transformer&rdquo; to language modeling
+- ## Masks words (approx. 15%) on training and attempts to predict masked words
+- ## Builds vectors to maximize the efficacy of this task
+- ## See [bit.ly/bert-towardsdatascience](bit.ly/bert-towardsdatascience)
+
+***
+
+---
+class: top 
+
+***
+
+# In All Three Examples
+
+***
+
+- ## Related words tend co-occur in documents and collocate in sentences
+- ## But ... given a source word, the model will suggest other words with similar before and after words, not necessarily the collocated terms
+- ## This means a word&rsquo;s opposite is often close to it in high dimensional space
+- ## Example: Sentences like &ldquo;I climbed up the ladder&rdquo; and &ldquo;I climbed down the ladder&ldquo; end up making _up_ and _down_ closer to each other than either is to _ladder_
+
+***
+
+---
+class: top 
+
+***
+
+# How Embeddings Are Used 
+
+***
+
+- ## NLP tasks: 
+
+## [https://www.aclweb.org/anthology/N15-1035/](https://www.aclweb.org/anthology/N15-1035/)
+
+## [https://rajpurkar.github.io/SQuAD-explorer/](https://rajpurkar.github.io/SQuAD-explorer/)
+
+- ## Computational text analysis 
+
+## [https://dh2017.adho.org/abstracts/582/582.pdf](https://dh2017.adho.org/abstracts/582/582.pdf)
+
+***
+
+---
+class: top 
+
+***
+
+# Colab Activity
+
+***
+
+## 1. Visit [bit.ly/colab-word2vec](bit.ly/colab-word2vec)
+## 2. Click &ldquo;Save a Copy in Drive&rdquo;
+## 3. Notebook has additional instructions
+
+***
+
+---
+class: top 
+
+***
+
+# Questions?
+
+***
+
+# Thank You!
+
+***
+
+
+
+    </textarea>
+    <script src="https://remarkjs.com/downloads/remark-latest.min.js">
+    </script>
+    <script>
+      var slideshow = remark.create();
+    </script>
+  </body>
+</html>
