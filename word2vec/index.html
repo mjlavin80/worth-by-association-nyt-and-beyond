@@ -264,7 +264,7 @@ class: top
 
 - ## Unsupervised learning (no &ldquo;ground truth&rdquo; training labels)
 - ## Models relatedness by words that appear often within a window size (e.g. five words to the left and right of a source word)
-- ## Requires "full text," not just bag-of-words data 
+- ## Requires &ldquo;full text,&rdquo; not just bag-of-words data 
 - ## Works best if sentences are segmented before training
 
 ***
@@ -310,10 +310,12 @@ class: top
 
 # BERT
 
+## Bidirectional Encoder Representations from Transformers
+
 ***
 
 - ## Produces high-dimensional vectors, just like others, using a deep learning approach
-- ## Applies &ldquo;bidirectional training of transformer&rdquo; to language modeling
+- ## Applies &ldquo;bidirectional training&rdquo; to language modeling
 - ## Masks words (approx. 15%) on training and attempts to predict masked words
 - ## Builds vectors to maximize the efficacy of this task
 - ## See [bit.ly/bert-towardsdatascience](bit.ly/bert-towardsdatascience)
@@ -332,7 +334,7 @@ class: top
 - ## Related words tend co-occur in documents and collocate in sentences
 - ## But ... given a source word, the model will suggest other words with similar before and after words, not necessarily the collocated terms
 - ## This means a word&rsquo;s opposite is often close to it in high dimensional space
-- ## Example: Sentences like &ldquo;I climbed up the ladder&rdquo; and &ldquo;I climbed down the ladder&ldquo; end up making _up_ and _down_ closer to each other than either is to _ladder_
+- ## Example: sentences like &ldquo;I climbed up the ladder&rdquo; and &ldquo;I climbed down the ladder&ldquo; end up making _up_ and _down_ closer to each other than either is to _ladder_
 
 ***
 
